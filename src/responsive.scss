@@ -1,0 +1,46 @@
+/////////////////////////////// responsive design for the landing Layout: 5 devices ///////////////////////////////
+
+// predefined break-points
+$breakpoint-xsmall: 576px;
+$breakpoint-small: 768px;
+$breakpoint-mid: 992px;
+$breakpoint-large: 1200px;
+$breakpoint-xsmall-height: 500px;
+
+// extra large devices
+@mixin xlarge {
+  @media (min-width: #{$breakpoint-large}) {
+    @content;
+  }
+}
+
+
+// large devices
+@mixin large {
+  @media (min-width: #{$breakpoint-mid}) and (max-width:#{$breakpoint-large - 1px}) {
+    @content;
+  }
+}
+
+
+// medium devices
+@mixin medium {
+  @media (min-width: #{$breakpoint-small}) and (max-width:#{$breakpoint-mid - 1px}) {
+    @content;
+  }
+}
+
+
+// small devices
+@mixin small {
+  @media (min-width: #{$breakpoint-xsmall}) and (max-width:#{$breakpoint-small - 1px}) {
+    @content;
+  }
+}
+
+// Extra Small devices
+@mixin xsmall {
+  @media (max-width:#{$breakpoint-xsmall - 1px}), (max-height: #{$breakpoint-xsmall-height}) {
+    @content;
+  }
+}

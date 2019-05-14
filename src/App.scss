@@ -1,0 +1,113 @@
+@import 'responsive.scss';
+
+// Style Guide
+$light-background: #d8dbe2;
+$light-text: #a9bcd0;
+$accent: #58a4b0;
+$dark: #373f51;
+$grey: #969a97;
+
+
+
+h1 {
+  color: $accent;
+}
+
+h2 {
+  color: $dark;
+}
+
+h3 {
+  color: $dark;
+}
+
+p {
+  color: $dark;
+  padding: 0px;
+}
+
+img {
+  height: 200px;
+  width: 200px;
+}
+
+.App {
+  text-align: center;
+  background-color: $light-background;
+}
+
+.nav {
+  display: flex;
+  height: 75px;
+  background-color: $dark;
+  border-bottom: 4px solid $accent;
+
+  h1 {
+    padding-left: 25px;
+  }
+
+  @include xsmall {
+    padding-left: 0px;
+    justify-content: center;
+  }
+}
+
+.restaurant-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  @include xsmall {
+    padding-top: 20px;
+  }
+}
+
+.restaurants {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  height: 330px;
+
+  @include xlarge {
+    padding: 2vw;
+    width: 20vw;
+
+    img {
+      height: 250px;
+      width: 250px;
+    }
+  }
+
+  @include large {
+    padding: 1vw;
+    width: 20vw;
+  }
+
+  @include medium {
+    padding: 1vw;
+    width: 20vw;
+
+    img {
+      width: 150px;
+      height: 150px;
+    }
+  }
+
+  @include small {
+    padding: 0.5vw;
+    width: 20vw;
+
+    img {
+      width: 100px;
+      height: 100px;
+    }
+  }
+
+  @include xsmall {
+    width: 200px;
+    padding: 2vw;
+  }
+}
+
