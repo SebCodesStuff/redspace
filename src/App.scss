@@ -18,7 +18,7 @@ h2 {
 }
 
 h3 {
-  color: $dark;
+  color: $accent;
 }
 
 p {
@@ -38,6 +38,7 @@ img {
 
 .nav {
   display: flex;
+  justify-content: space-between;
   height: 75px;
   background-color: $dark;
   border-bottom: 4px solid $accent;
