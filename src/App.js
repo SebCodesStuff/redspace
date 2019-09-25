@@ -1,47 +1,18 @@
 import React, { Component } from 'react';
 import './App.css';
-import InfiniteScroll from './InfiniteScroll'
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import { Input, Select } from '@material-ui/core';
+import DropDown from './components/DropDown'
+import TextField from './components/TextField'
+import { MoonLoader } from 'react-spinners';
 
-// make a scroll bar that as you scroll it gets
-// the next page
-
-const people = [
-  { id: 1, name: 'Luke SkyWalker' },
-  { id: 2, name: 'Han Solo'}
-]
+const spinnerCss = { marginTop: '75px' }
 
 class App extends Component {
   constructor () {
     super()
     this.state = {
-      data: {
-        restaurants: [],
-        dropDownOpen: false
-
-      }
+      person: {},
+      loading: false
     }
-  }
-
-  componentDidMount () {
-    fetch('https://swapi.co/api/people?page=2')
-    .then(res => {
-      if (res.status !== 200) {
-        console.log('There was an issue fetching the data')
-        return
-      }
-
-      res.json().then(data => {
-        console.log(data)
-        // this.setState({ data })
-      })
-    })
-    .catch(err => {
-      console.error(err)
-    })
   }
 
   render() {
@@ -49,72 +20,100 @@ class App extends Component {
       <div className="App">
         <div className='nav' >
           <h1>The Star Wars Nerdist</h1>
-          {this.peopleDropdown(people)}
+          <DropDown onChange={(id) => this.chooseCharacter(id)}/>
         </div>
         <h2>The best resource for all things Star Wars</h2>
-        <div className='restaurant-container'>
-          { this.displayRestaurants() }
-        </div>
+        <p>Please choose an id between 0 - 32 or choose by name in the input above</p>
+        <TextField onChange={(id) => this.chooseCharacter(id)}/>
+        <section className='info-section'>
+          <MoonLoader
+            css={spinnerCss}
+            class='spinner'
+            sizeUnit={"px"}
+            size={150}
+            loading={this.state.loading}
+          />
+          { this.displayPersonInfo() }
+        </section>
       </div>
     )
   }
 
-  peopleDropdown (people) {
+  displayPersonInfo () {
+    const {
+      name,
+      height,
+      mass,
+      hair_color,
+      skin_color,
+      gender,
+      birth_year,
+      homeworld,
+      filmsArr,
+      speciesInfo
+    } = this.state.person
+    if (!name) return null
     return (
-      <FormControl>
-        <InputLabel>Choose Your Character</InputLabel>
-        <Select value={"hans"}>
-          {this.displayNames(people)}
-        </Select>
-      </FormControl>
+      <div className='person-container' >
+        <h3>{ name }</h3>
+        <p><strong>Birth Year: </strong>{birth_year}</p>
+        <p><strong>Height: </strong>{`${height} cm`}</p>
+        <p><strong>Mass: </strong>{`${mass} kg`}</p>
+        <p><strong>Hair Color: </strong>{hair_color}</p>
+        <p><strong>Skin Color: </strong>{skin_color}</p>
+        <p><strong>Gender: </strong>{gender}</p>
+        {this.displaySpeciesInfo(speciesInfo)}
+        {this.displayFilmsInfo(filmsArr)}
+      </div>
     )
   }
 
-  // peopleDropdown (people) {
-  //   const { dropDownOpen } = this.state
-  //   return (
-  //     <div>
-  //       <h3 onClick={() => this.dropdownClicked()} >Choose Your Character</h3>
-  //       {dropDownOpen && this.displayNames(people)}
-  //     </div>
-
-  //   )
-  // }
-
-  dropdownClicked () {
-    this.setState({ dropDownOpen: !this.state.dropDownOpen })
+  displaySpeciesInfo (speciesInfo) {
+    if (!speciesInfo) return null
+    const { average_lifespan, classification, language, name } = speciesInfo
+    return (
+      <React.Fragment>
+        <h3>Species</h3>
+        <p><strong>Name: </strong>{name}</p>
+        <p><strong>Average Lifespan: </strong>{average_lifespan}</p>
+        <p><strong>Classification: </strong>{classification}</p>
+        <p><strong>Language: </strong>{language}</p>
+      </React.Fragment>
+    )    
   }
 
-  displayNames (people) {
-    return people.map(person => {
-      const { id, name } = person
-      return (
-        <MenuItem onClick={() => this.chooseCharacter(id)}>{name}</MenuItem>
-      )
-    })
+  displayFilmsInfo (filmArr) {
+    if (!filmArr) return null
+    return (
+      <React.Fragment>
+        <h3>Films Appeared In</h3>
+        {this.getFilmDetails(filmArr)}
+      </React.Fragment>
+    )
+
   }
 
-  displayRestaurants () {
-    const { restaurants } = this.state.data
-    if (!restaurants.length) return null
-    return restaurants.map((restaurant, index) => {
-      const { name, price, image_url, address } = restaurant
+  getFilmDetails (filmArr) {
+    return filmArr.map((film, i) => {
+      const {title, director, producer, release_date} = film
       return (
-        <div className='restaurants' key={index}>
-          <h3>{ name }</h3>
-          <img src={image_url} alt={`image for ${name}`} />
-          <p>{ address }</p>
+        <div className='film-section' key={i}>
+          <h4>{title}</h4>
+          <p><strong>Release Date: </strong>${release_date}</p>
+          <p><strong>Director: </strong>{director}</p>
+          <p><strong>Producer: </strong>{producer}</p>
         </div>
-      )
+      )    
     })
   }
 
   chooseCharacter (id) {
+    this.setState({ loading: true, person: {} })
     fetch(`http://localhost:4000/people/${id}`)
     .then(res => {
 
-      res.json().then(data => {
-        console.log(data)
+      res.json().then(person => {
+        this.setState({ person, loading: false })
       })
     })
   }

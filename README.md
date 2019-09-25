@@ -1,18 +1,18 @@
-Restaurant Coding Challenge
+RedSpace Coding Challenge
 ===========================
 
 Description
 -----------
 
-Please visit the deployed app at:
-https://restaurant-bmo-challenge.herokuapp.com/
+A simple react app that gets info about Star Wars characters based on their id from swap.io.
 
-Also see the answers to the technicak questions here:
-https://github.com/SebCodesStuff/restaurant-info-bmo/blob/master/answers-to-technical-questions.md
+Dependencies
+------------
 
-Returns a list of restaurants in Toronto to allow users to book browse and make reservations.
+ - Node
+ - Git
 
 Installation
 ------------
 
-Clone the project run npm i and then npm start. This should open a browser with app if not please go to localhost:3000
+Clone the project run npm i and then npm start. This should open a browser running the app app if not please go to localhost:3000

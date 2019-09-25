@@ -16,12 +16,13 @@ app.use((req, res, next) => {
 
 app.get("/people/:id", (req, res) => {
     const id = req.params.id
+    if (id < 1 || id > 32) return console.error('Invalid Id')
     console.log(`requesting id ${id}`)
     axios.get(`http://swapi.co/api/people/${id}`)
     .then(({ data }) => {
         const speciesURL = data.species[0]
         const films = data.films
-        const speciesPromise = getSepcies(speciesURL)
+        const speciesPromise = getSpecies(speciesURL)
         const filmPromise = getFilms(films)
         Promise.all([filmPromise, speciesPromise])
         .then(prom => {
@@ -50,7 +51,7 @@ function getFilms (films) {
     return Promise.all(promiseArr)
 }
 
-function getSepcies (speciesURL) {
+function getSpecies (speciesURL) {
     return axios.get(speciesURL)
     .then(({ data }) => {
         const { name, average_lifespan, classification, language } = data

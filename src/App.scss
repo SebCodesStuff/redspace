@@ -8,7 +8,6 @@ $dark: #373f51;
 $grey: #969a97;
 
 
-
 h1 {
   color: $accent;
 }
@@ -22,13 +21,28 @@ h3 {
 }
 
 p {
-  color: $dark;
   padding: 0px;
 }
 
-img {
-  height: 200px;
+body {
+  background-color: $light-background;
+  height: 100%;
+}
+
+
+#formControl {
+  background-color: white;
   width: 200px;
+  margin-top: 6%;
+  margin-right: 25px;
+
+  @include small {
+    margin-top: 0;
+  }
+
+  @include xsmall {
+    margin-top: 0;
+  }
 }
 
 .App {
@@ -47,68 +61,35 @@ img {
     padding-left: 25px;
   }
 
+  @include small {
+    padding-left: 0px;
+    justify-content: center;
+    flex-direction: column;
+    height: 175px;
+  }
+
   @include xsmall {
     padding-left: 0px;
     justify-content: center;
-  }
+    flex-direction: column;
+    height: 175px;  }
 }
 
-.restaurant-container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-
-  @include xsmall {
-    padding-top: 20px;
-  }
+.film-section {
+  margin: 60px 0;
 }
 
-.restaurants {
+.id-input {
+  margin-right: 20px;
+}
+
+.info-section {
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   align-items: center;
-  height: 330px;
-
-  @include xlarge {
-    padding: 2vw;
-    width: 20vw;
-
-    img {
-      height: 250px;
-      width: 250px;
-    }
-  }
-
-  @include large {
-    padding: 1vw;
-    width: 20vw;
-  }
-
-  @include medium {
-    padding: 1vw;
-    width: 20vw;
-
-    img {
-      width: 150px;
-      height: 150px;
-    }
-  }
-
-  @include small {
-    padding: 0.5vw;
-    width: 20vw;
-
-    img {
-      width: 100px;
-      height: 100px;
-    }
-  }
-
-  @include xsmall {
-    width: 200px;
-    padding: 2vw;
-  }
 }
 
+.spinner {
+  margin-top: 50px;
+}

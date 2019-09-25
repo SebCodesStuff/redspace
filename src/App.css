@@ -8,12 +8,25 @@ h3 {
   color: #58a4b0; }
 
 p {
-  color: #373f51;
   padding: 0px; }
 
-img {
-  height: 200px;
-  width: 200px; }
+body {
+  background-color: #d8dbe2;
+  height: 100%; }
+
+#formControl {
+  background-color: white;
+  width: 200px;
+  margin-top: 6%;
+  margin-right: 25px; }
+
+@media (min-width: 576px) and (max-width: 767px) {
+  #formControl {
+    margin-top: 0; } }
+
+@media (max-width: 575px), (max-height: 500px) {
+  #formControl {
+    margin-top: 0; } }
 
 .App {
   text-align: center;
@@ -29,58 +42,31 @@ img {
 .nav h1 {
   padding-left: 25px; }
 
+@media (min-width: 576px) and (max-width: 767px) {
+  .nav {
+    padding-left: 0px;
+    justify-content: center;
+    flex-direction: column;
+    height: 175px; } }
+
 @media (max-width: 575px), (max-height: 500px) {
   .nav {
     padding-left: 0px;
-    justify-content: center; } }
+    justify-content: center;
+    flex-direction: column;
+    height: 175px; } }
 
-.restaurant-container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center; }
+.film-section {
+  margin: 60px 0; }
 
-@media (max-width: 575px), (max-height: 500px) {
-  .restaurant-container {
-    padding-top: 20px; } }
+.id-input {
+  margin-right: 20px; }
 
-.restaurants {
+.info-section {
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-  height: 330px; }
+  align-items: center; }
 
-@media (min-width: 1200px) {
-  .restaurants {
-    padding: 2vw;
-    width: 20vw; }
-  .restaurants img {
-    height: 250px;
-    width: 250px; } }
-
-@media (min-width: 992px) and (max-width: 1199px) {
-  .restaurants {
-    padding: 1vw;
-    width: 20vw; } }
-
-@media (min-width: 768px) and (max-width: 991px) {
-  .restaurants {
-    padding: 1vw;
-    width: 20vw; }
-  .restaurants img {
-    width: 150px;
-    height: 150px; } }
-
-@media (min-width: 576px) and (max-width: 767px) {
-  .restaurants {
-    padding: 0.5vw;
-    width: 20vw; }
-  .restaurants img {
-    width: 100px;
-    height: 100px; } }
-
-@media (max-width: 575px), (max-height: 500px) {
-  .restaurants {
-    width: 200px;
-    padding: 2vw; } }
+.spinner {
+  margin-top: 50px; }
